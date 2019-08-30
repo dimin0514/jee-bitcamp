@@ -1,6 +1,8 @@
 package com.bank.web.test;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -25,6 +27,7 @@ public class FileTest {
 				BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
 				BufferedReader reader = new BufferedReader(new FileReader(file));
 				StringBuffer buff = null;
+				List<String> list = new ArrayList<>();
 				while(true) {
 				switch(JOptionPane.showInputDialog("0.종료 1.저장 2.읽기")) {
 				case "0":  
@@ -40,9 +43,9 @@ public class FileTest {
 					msg = "";
 					buff = new StringBuffer();
 					while((msg = reader.readLine())!= null) {
-						buff.append(reader.readLine()+"/n");
+						list.add(msg+"/");
 					}
-					JOptionPane.showMessageDialog(null, buff);
+					JOptionPane.showMessageDialog(null, list);
 					reader.close();
 					break;
 				}

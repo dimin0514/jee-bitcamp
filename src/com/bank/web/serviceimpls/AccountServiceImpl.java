@@ -51,13 +51,13 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public AccountBean findByAccountNum(String accountNum) {
 		AccountBean temp= new AccountBean();
-		for(AccountBean ac : accounts) {
-			//if(accountNum.equals(accounts.getAccuntNum())) {
-			//	temp= ac;
-			//	break;
-		//	}
+		for( AccountBean c : accounts) {
+			if(accountNum.equals(c.getAccuntNum())) {
+				temp = c;
+			}
 		}
 		return temp;
+		
 	}
 
 	@Override
@@ -81,25 +81,35 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void depositMoney(AccountBean param) {
-		String acn= param.getAccuntNum();
-		String oldMoney = param.getMoney();
-		
-		
+		AccountBean acc = new AccountBean();
+		for(AccountBean bb : accounts) {
+			if(param.getAccuntNum().equals(bb.getAccuntNum())) {
+				acc = bb;
+				int sum = Integer.parseInt(acc.getMoney())+Integer.parseInt(param.getMoney());
+				acc.setMoney(sum + "");
+			}
+		}
 	}
 
 	@Override
 	public void withdrawMoney(AccountBean param) {
-		
+		AccountBean acc = new AccountBean();
+		for(AccountBean bb : accounts) {
+			if(param.getAccuntNum().equals(bb.getAccuntNum())) {
+				acc = bb;
+				int sum = Integer.parseInt(param.getMoney())-Integer.parseInt(acc.getMoney());
+				acc.setMoney(sum + "");
+			}
+		}
 	}
 
 	@Override
 	public void deleteAccountNum(String accountNum) {
-		if(existAccountNum(accountNum)) {
-			
+		
+		for(AccountBean bb : accounts) {
+			if(accountNum.equals(bb.getAccuntNum())) {
+				accounts.remove(bb);
+			}
 		}
-		
-		
 	}
-	
-
 }
