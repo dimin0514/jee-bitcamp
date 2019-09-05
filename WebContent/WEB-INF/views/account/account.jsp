@@ -26,11 +26,10 @@
 <script>
 $('#btn').click(function(){
 	alert('버튼클릭!!');
-	location.assign('<%=request.getContextPath()%>/member.do?action=move&dest=login');
 });
 $('#a_join').click(function(){
 	alert('회원가입 클릭');
-	location.assign('<%=request.getContextPath()%>/member.do?action=move&dest=join');
+	location.assign('<%=request.getContextPath()%>/member.do');
 });
 </script>
 

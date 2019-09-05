@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Random;
 
 import com.bank.web.domains.AccountBean;
-import com.bank.web.domains.MemberBean;
 import com.bank.web.services.AccountService;
 
 public class AccountServiceImpl implements AccountService {

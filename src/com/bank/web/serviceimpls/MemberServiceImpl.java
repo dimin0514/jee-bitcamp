@@ -1,26 +1,35 @@
 package com.bank.web.serviceimpls;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bank.web.daoImpls.MemberDAOImpl;
+import com.bank.web.daos.MemberDAO;
 import com.bank.web.domains.CustomerBean;
 import com.bank.web.domains.EmployeeBean;
 import com.bank.web.domains.MemberBean;
+import com.bank.web.pool.Constants;
 import com.bank.web.services.MemberService;
 
 public class MemberServiceImpl implements MemberService {
 	
 	private List<CustomerBean> customers;
 	private List<EmployeeBean> employees;
+	private MemberDAO dao;
 	
 	public MemberServiceImpl() {
 		customers = new ArrayList<>();
 		employees = new ArrayList<>();
+		dao= new MemberDAOImpl();
 	}
 	
 
 	@Override
 	public void join(CustomerBean param) {
 		customers.add(param);
+		dao.insertCustomer(param);
 		
 	}
 
@@ -94,23 +103,38 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean login(MemberBean param) {
-		MemberBean mb = findById(param.getId());
-		boolean flag = false;
-		for(CustomerBean c : customers) {
-			if(mb.equals(c.getId())) {
-				flag = true;
-				break;
-			}
-		}
-		for(EmployeeBean e:employees) {
-			if(mb.equals(e.getId())) {
-				flag = true;
-				break;
-			}
-		}
-		return flag;
+	public CustomerBean login(CustomerBean param) {
+		CustomerBean temp = new CustomerBean();
 	
+		try {
+			File file = new File(Constants.FILE_PATH+"customers0905.txt");
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String msg = reader.readLine();
+			reader.close();
+			CustomerBean aa = new CustomerBean();
+			String[] ab = msg.split(",");
+			aa.setId(ab[0]);
+			aa.setPw(ab[1]);
+
+			System.out.println("asdfasd"+ab[0]+"tgg"+param.getId()+"웃겨");
+			if(param.getId().equals(aa.getId())&&param.getPw().equals(aa.getPw())){
+
+				temp.setId(ab[0]);
+				temp.setPw(ab[1]);
+				temp.setName(ab[2]);
+				temp.setSsn(ab[3]);
+				temp.setCredit(ab[4]);
+			
+				
+		}else {
+			temp=null;
+		}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return temp;
 	}
 
 	@Override

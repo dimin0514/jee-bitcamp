@@ -10,7 +10,7 @@ public interface MemberService {
 	public List<EmployeeBean> findAllEmployees();
 	public List<MemberBean> findByName(String name); 
 	public MemberBean findById(String id); 
-	public boolean login(MemberBean param); 
+	public CustomerBean login(CustomerBean param); 
 	public int countCustomers(); 
 	public int countEmployees(); 
 	public boolean existId(String id);
