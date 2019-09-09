@@ -105,9 +105,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public CustomerBean login(CustomerBean param) {
 		CustomerBean temp = new CustomerBean();
-	
+
 		try {
-			File file = new File(Constants.FILE_PATH+"customers0905.txt");
+			File file = new File(Constants.FILE_PATH + "customers0905.txt");
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String msg = reader.readLine();
 			reader.close();
@@ -116,22 +116,20 @@ public class MemberServiceImpl implements MemberService {
 			aa.setId(ab[0]);
 			aa.setPw(ab[1]);
 
-			System.out.println("asdfasd"+ab[0]+"tgg"+param.getId()+"웃겨");
-			if(param.getId().equals(aa.getId())&&param.getPw().equals(aa.getPw())){
+			System.out.println("저장된 가입된 아이디: " + ab[0] + "내가쓴아이디: " + param.getId() + "파일읽기성공");
+			if (param.getId().equals(aa.getId()) && param.getPw().equals(aa.getPw())) {
 
 				temp.setId(ab[0]);
 				temp.setPw(ab[1]);
 				temp.setName(ab[2]);
 				temp.setSsn(ab[3]);
 				temp.setCredit(ab[4]);
-			
-				
-		}else {
-			temp=null;
-		}
-			
-			
-		}catch(Exception e) {
+
+			} else {
+				temp = null;
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return temp;
