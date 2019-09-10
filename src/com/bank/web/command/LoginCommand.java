@@ -18,8 +18,8 @@ public class LoginCommand extends MoveCommand{
 		MemberService service = new MemberServiceImpl();
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		//id = request.getParameter("id");
-		//pw = request.getParameter("pw");
+		id = request.getParameter("id");
+		pw = request.getParameter("pw");
 		param.setId(id);
 		param.setPw(pw);
 		CustomerBean cust = service.login(param);
